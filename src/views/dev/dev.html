@@ -1,0 +1,57 @@
+<b-container fluid class="dev">
+  <b-row align-h="between">
+    <b-col cols="2">
+      <div>開発用</div>
+      <b-icon icon="code-slash" variant="danger" v-if="vcmdMode"></b-icon>
+      <b-icon icon="tools" variant="danger" v-if="vcmdMode"></b-icon>
+    </b-col>
+    <b-col cols="3" class="text-left">
+      <div v-if="vcmd">コマンド：{{vcmd}}</div>
+      <div v-if="vcmdMsg" class="text-danger">{{vcmdMsg}}</div>
+    </b-col>
+    <b-col class="text-left">
+      <!-- <b-button variant="primary" v-on:click="startRecording">録音開始</b-button> -->
+      <!-- <b-button variant="info" v-on:click="downloadRecording">マイク音声ダウンロード</b-button> -->
+      <a id="download"></a>
+      <!-- <b-button class="ml-3" variant="primary" v-on:click="csvDownload">ダウンロード</b-button> -->
+    </b-col>
+    <b-col>
+      <div class="text-right">正答率：{{correctRatio}}%</div>
+    </b-col>
+    <b-col>
+      <div class="text-right">{{startTime}}</div>
+      <div class="text-right">経過時間：{{elapsedTime}}</div>
+    </b-col>
+  </b-row>
+  <b-table sticky-header="78vh" no-border-collapse fixed 
+    selectable select-mode="single"
+    :fields="tableFields" :items="audioItems"
+    @row-selected="onRowSelected">
+    <template #cell(jaText)="data">
+      <div v-if="data.item.localflg">
+        <div class="float-right" style="margin-left: 60%;">{{data.value}}</div>
+      </div>
+      <div v-else>
+        <div class="float-left" style="margin-right: 60%;">{{data.value}}</div>
+      </div>
+    </template>
+    <template #cell(localflg)="data">
+      <div v-if="data.item.localflg">
+        <div class="local-device">{{data.value}}</div>
+      </div>
+      <div v-else>
+        <div class="receive-device">{{data.value}}</div>
+      </div>
+    </template>
+
+    <template #cell(correctflg)="data">
+      <b-form-group>
+          <input type="checkbox" v-model="data.item.correctflg" />
+      </b-form-group>
+   </template>
+
+  </b-table>
+  <!-- <canvas id="localCanvas"></canvas>
+  <canvas id="recieveCanvas"></canvas> -->
+</b-container>
+

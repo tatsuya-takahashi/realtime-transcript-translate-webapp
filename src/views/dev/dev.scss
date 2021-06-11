@@ -1,0 +1,22 @@
+.dev {
+    .receive-device{
+        margin: 1em 0;
+        background: #acffa1;
+        box-shadow: 0px 0px 0px 10px #acffa1;
+        border-radius: 10px;/*角の丸み*/
+        p {
+            margin: 0; 
+            padding: 0;
+        }
+    }
+    .local-device{
+        margin: 1em 0;
+        background: #d6ebff;
+        box-shadow: 0px 0px 0px 10px #d6ebff;
+        border-radius: 10px;/*角の丸み*/
+        p {
+            margin: 0; 
+            padding: 0;
+        }
+    }
+}
